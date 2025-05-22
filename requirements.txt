@@ -3,5 +3,9 @@ pyvista
 GPUtil
 ffmpeg
 GitPython
+torch
 theseus-ai
 potpourri3d
+scikit-learn
+dill
+open3d
