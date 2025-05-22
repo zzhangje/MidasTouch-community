@@ -9,7 +9,7 @@ TACTO rendering class
 
 from os import path as osp
 import numpy as np
-import trimesh
+from tacto.loaders.object_loader import object_loader
 import tacto
 from tacto.renderer import euler2matrix
 import cv2
@@ -30,10 +30,6 @@ import random
 DEBUG = False
 
 
-def get_background_image_path(bg_id):
-    return osp.join(DIRS["data"], "bgs", f"bg_{bg_id}.jpg")
-
-
 class digit_renderer:
     def __init__(
         self,
@@ -47,14 +43,15 @@ class digit_renderer:
         self.render_config = cfg
 
         if randomize:
-            bg_id = random.randint(0, 10)
+            bg_id = random.randint(0, 30)
             print(f"Randomize on, background id: {bg_id}")
         # Create renderer
         self.renderer = tacto.Renderer(
             width=cfg.width,
             height=cfg.height,
-            background=cv2.imread(get_background_image_path(bg_id)),
-            config_path=tacto.get_digit_shadow_config_path()
+            background=cv2.imread(tacto.get_background_image_path(bg_id)),
+            config_path=tacto.get_digit_shadow_config_path(),
+            headless=headless,
         )
         self.cam_dist = cfg.cam_dist
         self.pixmm = cfg.pixmm
@@ -65,8 +62,9 @@ class digit_renderer:
             self.bg_depth_pix = self.correct_pyrender_height_map(self.bg_depth)
 
         if obj_path is not None:
-            self.obj_trimesh = trimesh.load(obj_path)
-            self.renderer.add_object(self.obj_trimesh, "object")
+            self.obj_loader = object_loader(obj_path)
+            obj_trimesh = trimesh.load(obj_path)
+            self.renderer.add_object(obj_trimesh, "object")
 
         self.press_depth = 0.001
         self.randomize = randomize
@@ -93,12 +91,12 @@ class digit_renderer:
         """
         Convert meter to pixels
         """
-        dist = np.linalg.norm(point - self.obj_trimesh.vertices, axis=1)
+        dist = np.linalg.norm(point - self.obj_loader.obj_vertices, axis=1)
         idx = np.argmin(dist)
 
         # idx: the idx vertice, get a new pose
-        new_position = self.obj_trimesh.vertices[idx].copy()
-        new_orientation = self.obj_trimesh.vertex_normals[idx].copy()
+        new_position = self.obj_loader.obj_vertices[idx].copy()
+        new_orientation = self.obj_loader.obj_normals[idx].copy()
 
         delta = np.random.uniform(low=0.0, high=2 * np.pi, size=(1,))[0]
         new_pose = pose_from_vertex_normal(
@@ -222,8 +220,7 @@ class digit_renderer:
         else:
             heightmapValid = depth
 
-        #TODO: what is f
-        f, w, h = 1000, self.renderer.width / 2.0, self.renderer.height / 2.0
+        f, w, h = self.renderer.f, self.renderer.width / 2.0, self.renderer.height / 2.0
 
         if not torch.is_tensor(heightmapValid):
             heightmapValid = torch.from_numpy(heightmapValid)
