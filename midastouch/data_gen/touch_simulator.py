@@ -101,7 +101,7 @@ def touch_simulator(cfg: DictConfig):
         return
 
     # start renderer
-    tac_render = digit_renderer(cfg=render_cfg, obj_path=obj_path, headless=headless)
+    tac_render = digit_renderer(cfg=render_cfg, obj_path=obj_path)
 
     # remove NaNs
     batch_size = 1000

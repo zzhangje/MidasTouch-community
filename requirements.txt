@@ -1,0 +1,7 @@
+tacto @ git+https://github.com/zhangzrjerry/tactopatch.git
+pyvista
+GPUtil
+ffmpeg
+GitPython
+theseus-ai
+potpourri3d

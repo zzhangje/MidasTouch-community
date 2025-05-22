@@ -121,3 +121,5 @@ $RECYCLE.BIN/
 # pre-trained models 
 *.tar 
 *.pth
+
+ycb_slide/*

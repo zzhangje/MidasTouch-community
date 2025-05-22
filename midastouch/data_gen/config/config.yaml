@@ -4,4 +4,4 @@
 # LICENSE file in the root directory of this source tree.
 
 defaults:
-  - method: train_data # train_data, manual_slide, ycb_slide
+  - method: ycb_slide # train_data, manual_slide, ycb_slide
