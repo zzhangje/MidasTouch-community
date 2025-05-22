@@ -9,6 +9,7 @@ Pose and mesh utilities for data generation
 
 import numpy as np
 import pyvista as pv
+import open3d as o3d
 import potpourri3d as pp3d
 import random
 from scipy.spatial import KDTree

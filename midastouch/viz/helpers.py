@@ -57,7 +57,7 @@ def viz_poses_pointclouds_on_mesh(
             ]
         else:
             downpcd = pointcloud
-        final_pc = np.append(final_pc, downpcd)
+        final_pc = np.vstack([final_pc, downpcd])
 
     if final_pc.shape[0]:
         pc = pv.PolyData(final_pc)

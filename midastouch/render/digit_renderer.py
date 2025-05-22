@@ -222,7 +222,8 @@ class digit_renderer:
         else:
             heightmapValid = depth
 
-        f, w, h = self.renderer.f, self.renderer.width / 2.0, self.renderer.height / 2.0
+        #TODO: what is f
+        f, w, h = 1000, self.renderer.width / 2.0, self.renderer.height / 2.0
 
         if not torch.is_tensor(heightmapValid):
             heightmapValid = torch.from_numpy(heightmapValid)
