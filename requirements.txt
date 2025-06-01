@@ -1,3 +1,8 @@
+numpy == 1.22.4
+# (`numpy.distutils` is deprecated since NumPy 1.23.0, as a result
+#   of the deprecation of `distutils` itself. It will be removed for
+#   Python >= 3.12. For older Python versions it will remain present.
+#   It is recommended to use `setuptools < 60.0` for those Python versions.)
 tacto @ git+https://github.com/zhangzrjerry/tactopatch.git
 pyvista
 GPUtil

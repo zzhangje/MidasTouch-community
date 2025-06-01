@@ -1,6 +1,6 @@
 # Midas Patch
 
-Midas denotes Monte-Carlo inference over distributions across sliding, performs online global localization of a vision-based touch sensor on an object surface during sliding interactions. For details, refer to authors' <a href="https://suddhu.github.io/midastouch-tactile/">website</a> or their <a href="https://openreview.net/forum?id=JWROnOf4w-K">repo</a>. This is a patched version, compatible with **Python 3.8 to 3.12**.
+Midas denotes Monte-Carlo inference over distributions across sliding, performs online global localization of a vision-based touch sensor on an object surface during sliding interactions. For details, refer to authors' <a href="https://suddhu.github.io/midastouch-tactile/">website</a> or their <a href="https://openreview.net/forum?id=JWROnOf4w-K">repo</a>. This is a patched version, compatible with **Python 3.8 to 3.11**. (`open3d` does not support 3.13, `distutils` does not support 3.12 or above).
 
 <div align="center">
   <img src=".github/power_drill_ycb_slide.png"
@@ -14,16 +14,25 @@ Midas denotes Monte-Carlo inference over distributions across sliding, performs 
 ```bash
 sudo apt install build-essential python3-dev libopenblas-dev
 
-# Python should >= 3.8, <= 3.12
+# Python should >= 3.8, <= 3.11
 pip install -r requirements.txt
 pip install -e .
 ```
 
 ## Usage
 
-```bash
-python midastouch/data_gen/generate_data.py
-```
+- [x] `data_gen/generate_data.py`
+
+  ```bash
+  pip install gdown
+  git submodule update --init --recursive
+  cd YCB-Slide
+  chmod +x download_dataset.sh && ./download_dataset.sh # requires gdown
+  cd ..
+  python data_gen/generate_data.py
+  ```
+
+- [ ] `filter/filter.py`
 
 ## License
 
