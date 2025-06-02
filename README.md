@@ -1,6 +1,8 @@
-# Midas Patch
+# Midas Docker
 
-Midas denotes Monte-Carlo inference over distributions across sliding, performs online global localization of a vision-based touch sensor on an object surface during sliding interactions. For details, refer to authors' <a href="https://suddhu.github.io/midastouch-tactile/">website</a> or their <a href="https://openreview.net/forum?id=JWROnOf4w-K">repo</a>. This is a patched version, compatible with **Python 3.8 to 3.11**. (`open3d` does not support 3.13, `distutils` does not support 3.12 or above).
+MidasTouch performs online global localization of a vision-based touch sensor on an object surface during sliding interactions using Monte-Carlo inference over distributions. For more details, see the authors' <a href="https://suddhu.github.io/midastouch-tactile/">website</a> or their <a href="https://openreview.net/forum?id=JWROnOf4w-K">paper</a>.
+
+This is a patched version compatible with **Python 3.8 to 3.11** (`open3d` does not support Python 3.13, `distutils` does not support Python 3.12 or above). A `Dockerfile` is provided to minimize setup time, including pre-installed dependencies such as MinkowskiEngine.
 
 <div align="center">
   <img src=".github/power_drill_ycb_slide.png"
@@ -11,12 +13,33 @@ Midas denotes Monte-Carlo inference over distributions across sliding, performs 
 
 ## Setup
 
-```bash
-sudo apt install build-essential python3-dev libopenblas-dev
+Build docker image
 
-# Python should >= 3.8, <= 3.11
-pip install -r requirements.txt
+```bash
+docker build -t midastouch .
+```
+
+Enter docker container via terminal and install `midastouch`
+
+```bash
+docker run --gpus all \
+  -it \
+  -v $(pwd):/workspace/midastouch \
+  midastouch bash
+
+cd /workspace/midastouch
 pip install -e .
+```
+
+Download the weights, codebooks, and dataset. `gdown` is required to run the following command.
+
+```bash
+# download weights/codebooks
+chmod +x download_assets.sh && ./download_assets.sh
+
+# download YCB-Slide dataset
+git submodule update --init --recursive
+cd YCB-Slide && chmod +x download_dataset.sh && ./download_dataset.sh && cd ..
 ```
 
 ## Usage
@@ -24,15 +47,16 @@ pip install -e .
 - [x] `data_gen/generate_data.py`
 
   ```bash
-  pip install gdown
-  git submodule update --init --recursive
-  cd YCB-Slide
-  chmod +x download_dataset.sh && ./download_dataset.sh # requires gdown
-  cd ..
   python data_gen/generate_data.py
   ```
 
 - [ ] `filter/filter.py`
+  ```bash
+  python midastouch/filter/filter.py expt=ycb # default: 004_sugar_box log 0
+  python midastouch/filter/filter.py expt.obj_model=035_power_drill expt.log_id=3 # 035_power_drill log 3
+  python midastouch/filter/filter.py expt.off_screen=True   # disable visualization
+  python midastouch/filter/filter.py expt=mcmaster   # small parts: cotter-pin log 0
+  ```
 
 ## License
 

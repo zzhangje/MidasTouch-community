@@ -1,16 +1,18 @@
-numpy == 1.22.4
+# Minkowski Engine requirements:
 # (`numpy.distutils` is deprecated since NumPy 1.23.0, as a result
 #   of the deprecation of `distutils` itself. It will be removed for
 #   Python >= 3.12. For older Python versions it will remain present.
 #   It is recommended to use `setuptools < 60.0` for those Python versions.)
+pybullet == 3.2.5
 tacto @ git+https://github.com/zhangzrjerry/tactopatch.git
 pyvista
 GPUtil
 ffmpeg
 GitPython
-torch
 theseus-ai
 potpourri3d
 scikit-learn
 dill
 open3d
+yappi
+pyvistaqt
