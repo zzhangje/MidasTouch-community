@@ -4,7 +4,7 @@
 # LICENSE file in the root directory of this source tree.
 
 """
-Miscellaneous functions 
+Miscellaneous functions
 """
 
 import numpy as np
@@ -45,14 +45,14 @@ DIRS = {
 }
 
 
-def get_device(cpu: bool = False, verbose: bool = True) -> str:
+def get_device(cpu: bool = True, verbose: bool = True) -> str:
     """
     Check GPU utilization and return device for torch
     """
     if cpu:
         device = "cpu"
         if verbose:
-            print("Override, using device:", device)
+            print("By default, using device:", device)
     else:
         try:
             deviceID = GPUtil.getFirstAvailable(
@@ -67,7 +67,9 @@ def get_device(cpu: bool = False, verbose: bool = True) -> str:
                 "cuda:" + str(deviceID[0]) if torch.cuda.is_available() else "cpu"
             )
             if verbose:
-                print("Using device:", torch.cuda.get_device_name(deviceID[0]))
+                print(
+                    "Override, using device:", torch.cuda.get_device_name(deviceID[0])
+                )
         except:
             device = "cpu"
             if verbose:

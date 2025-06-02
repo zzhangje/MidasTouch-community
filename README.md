@@ -13,7 +13,9 @@ This is a patched version compatible with **Python 3.8 to 3.11** (`open3d` does 
 
 ## Setup
 
-Build the docker image and allows docker to connect to your X server.
+Build the docker image and allows docker to connect to your X server. You can specify the Ubuntu, CUDA, PyTorch version via [Dockerfile](./Dockerfile).
+
+> [Minkowski Engine](https://github.com/NVIDIA/MinkowskiEngine) is compatible with `numpy<=1.23.0` and `CUDA 10.2` or `CUDA 11.X`. The install option is set to `cpu_only` by default due to incompatibility with `CUDA 11.3` on the `RTX 4060`. You can change this to `force_cuda` if you prefer GPU support.
 
 ```bash
 docker build -t midastouch .
@@ -53,7 +55,7 @@ cd YCB-Slide && chmod +x download_dataset.sh && ./download_dataset.sh && cd ..
   python data_gen/generate_data.py
   ```
 
-- [ ] `filter/filter.py`
+- [x] `filter/filter.py`
   ```bash
   python midastouch/filter/filter.py expt=ycb # default: 004_sugar_box log 0
   python midastouch/filter/filter.py expt.obj_model=035_power_drill expt.log_id=3 # 035_power_drill log 3

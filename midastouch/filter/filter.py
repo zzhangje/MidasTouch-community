@@ -43,7 +43,7 @@ def filter(cfg: DictConfig, viz: Viz) -> None:
     """Filtering for tactile simulation data"""
     expt_cfg, tcn_cfg, tdn_cfg = cfg.expt, cfg.tcn, cfg.tdn
 
-    device = get_device(cpu=False)
+    device = get_device()
 
     # print('\n----------------------------------------\n')
     # print(OmegaConf.to_yaml(cfg))
@@ -251,7 +251,7 @@ def filter(cfg: DictConfig, viz: Viz) -> None:
     print("---------------------------------------------------------\n\n")
     np.save(osp.join(results_path, "filter_stats.npy"), filter_stats)
     pbar.set_description("Generating video from images")
-    images_to_video(results_path)  # convert saved images to .mp4
+    # images_to_video(results_path)  # convert saved images to .mp4
     pbar.close()
     return
 

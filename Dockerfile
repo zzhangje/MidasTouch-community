@@ -31,24 +31,22 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
 ARG PYTORCH_VERSION=1.12.0
 ARG PYTORCH_CUDA=cu113
 RUN pip install --no-cache-dir \
+    numpy==1.21.6 \
+    ninja \
     torch==${PYTORCH_VERSION}+${PYTORCH_CUDA} \
     torchvision==0.13.0+${PYTORCH_CUDA} \
     torchaudio==0.12.0 \
     --extra-index-url https://download.pytorch.org/whl/${PYTORCH_CUDA}
 
-# Install Minkowski Engine dependencies
-RUN pip install --no-cache-dir \
-    numpy==1.21.6 \
-    ninja
-
 # Clone and install Minkowski Engine
 RUN git clone https://github.com/NVIDIA/MinkowskiEngine.git && \
     cd MinkowskiEngine && \
-    python setup.py install --blas_include_dirs=/usr/include/openblas --force_cuda
+    python setup.py install --blas_include_dirs=/usr/include/openblas --cpu_only
 
 # Install additional Python packages
 RUN apt-get update && apt-get install -y \
     libsuitesparse-dev \
+    ffmpeg \
     libgl1 \
     libegl1 \
     libxrender1 \

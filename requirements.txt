@@ -7,7 +7,7 @@ pybullet == 3.2.5
 tacto @ git+https://github.com/zhangzrjerry/tactopatch.git
 pyvista
 GPUtil
-ffmpeg
+ffmpeg-python
 GitPython
 theseus-ai == 0.1.0
 potpourri3d
