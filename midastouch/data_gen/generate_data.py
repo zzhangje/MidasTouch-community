@@ -11,8 +11,6 @@ from midastouch.data_gen.touch_simulator import touch_simulator
 from midastouch.modules.objects import ycb_test, ycb_train
 import hydra
 from omegaconf import DictConfig
-import os
-os.environ["PYOPENGL_PLATFORM"] = "egl"
 
 @hydra.main(version_base=None, config_path="./config", config_name="config")
 def main(cfg: DictConfig):

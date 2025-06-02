@@ -129,7 +129,7 @@ def filter(cfg: DictConfig, viz: Viz) -> None:
 
     # run filter
     while True:
-        while viz.pause:
+        while viz and viz.pause:
             time.sleep(0.01)
         current_time = filter_stats["total_time"]
         idx = int(frame_rate * current_time)

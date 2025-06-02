@@ -46,7 +46,7 @@ RUN git clone https://github.com/NVIDIA/MinkowskiEngine.git && \
     cd MinkowskiEngine && \
     python setup.py install --blas_include_dirs=/usr/include/openblas --force_cuda
 
-# Install additional system dependencies for MidasTouch
+# Install additional Python packages
 RUN apt-get update && apt-get install -y \
     libsuitesparse-dev \
     libgl1 \
@@ -60,5 +60,5 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt /workspace/requirements.txt
 RUN pip install --no-cache-dir -r /workspace/requirements.txt
 
-# Install additional Python packages
+ENV PYOPENGL_PLATFORM=egl
 WORKDIR /workspace

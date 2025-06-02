@@ -9,8 +9,8 @@ obj_model : 004_sugar_box # Object model
 log_id : 0 # Log ID
 ablation : False
 frame_rate : 10
-off_screen : False
-render : True
+off_screen : True
+render : False
 max_length : None
 codebook_size : 50000
 

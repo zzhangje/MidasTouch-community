@@ -13,17 +13,20 @@ This is a patched version compatible with **Python 3.8 to 3.11** (`open3d` does 
 
 ## Setup
 
-Build docker image
+Build the docker image and allows docker to connect to your X server.
 
 ```bash
 docker build -t midastouch .
+xhost +local:root
 ```
 
-Enter docker container via terminal and install `midastouch`
+Enter docker container via terminal and install `midastouch`.
 
 ```bash
 docker run --gpus all \
   -it \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
   -v $(pwd):/workspace/midastouch \
   midastouch bash
 
@@ -31,7 +34,7 @@ cd /workspace/midastouch
 pip install -e .
 ```
 
-Download the weights, codebooks, and dataset. `gdown` is required to run the following command.
+Download the weights, codebooks, and dataset. `gdown` is required for the following command.
 
 ```bash
 # download weights/codebooks

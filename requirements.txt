@@ -9,10 +9,11 @@ pyvista
 GPUtil
 ffmpeg
 GitPython
-theseus-ai
+theseus-ai == 0.1.0
 potpourri3d
 scikit-learn
 dill
 open3d
 yappi
 pyvistaqt
+pynanoflann
