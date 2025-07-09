@@ -38,10 +38,10 @@ RUN pip install --no-cache-dir \
     torchaudio==0.12.0 \
     --extra-index-url https://download.pytorch.org/whl/${PYTORCH_CUDA}
 
-# Clone and install Minkowski Engine or --cpu_only
-RUN git clone https://github.com/NVIDIA/MinkowskiEngine.git && \
-    cd MinkowskiEngine && \
-    python setup.py install --blas_include_dirs=/usr/include/openblas --force_cuda
+# Clone and install Minkowski Engine
+RUN git clone https://github.com/zzhangje/MinkowskiEngine-community.git && \
+    cd MinkowskiEngine-community && \
+    python setup.py install --blas_include_dirs=/usr/include/openblas --blas=openblas --force_cuda
 
 # Install additional Python packages
 RUN apt-get update && apt-get install -y \
@@ -52,6 +52,7 @@ RUN apt-get update && apt-get install -y \
     libxrender1 \
     libglib2.0-0 \
     python3.8-tk \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements file and install Python dependencies
