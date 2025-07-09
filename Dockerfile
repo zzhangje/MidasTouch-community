@@ -38,10 +38,10 @@ RUN pip install --no-cache-dir \
     torchaudio==0.12.0 \
     --extra-index-url https://download.pytorch.org/whl/${PYTORCH_CUDA}
 
-# Clone and install Minkowski Engine
+# Clone and install Minkowski Engine or --cpu_only
 RUN git clone https://github.com/NVIDIA/MinkowskiEngine.git && \
     cd MinkowskiEngine && \
-    python setup.py install --blas_include_dirs=/usr/include/openblas --cpu_only
+    python setup.py install --blas_include_dirs=/usr/include/openblas --force_cuda
 
 # Install additional Python packages
 RUN apt-get update && apt-get install -y \
