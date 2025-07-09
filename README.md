@@ -1,4 +1,4 @@
-# Midas Docker
+# MidasTouch Community
 
 MidasTouch performs online global localization of a vision-based touch sensor on an object surface during sliding interactions using Monte-Carlo inference over distributions. For more details, see the authors' <a href="https://suddhu.github.io/midastouch-tactile/">website</a> or their <a href="https://openreview.net/forum?id=JWROnOf4w-K">paper</a>.
 
