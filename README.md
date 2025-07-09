@@ -63,6 +63,13 @@ cd YCB-Slide && chmod +x download_dataset.sh && ./download_dataset.sh && cd ..
   python midastouch/filter/filter.py expt=mcmaster   # small parts: cotter-pin log 0
   ```
 
+- [x] `filter/filter_real.py`
+
+  ```bash
+  python midastouch/filter/filter_real.py expt=ycb # default: 004_sugar_box log 0
+  python midastouch/filter/filter_real.py expt.obj_model=021_bleach_cleanser expt.log_id=2 # 021_bleach_cleanser log 2
+  ```
+
 ## License
 
 The majority of MidasTouch is licensed under MIT license, however portions of the project are available under separate license terms: MinkLoc3D is licensed under the MIT license; FCRN-DepthPrediction is licensed under the BSD 2-clause license; pytorch3d is licensed under the BSD 3-clause license. Please see the [LICENSE](LICENSE) file for more information.
