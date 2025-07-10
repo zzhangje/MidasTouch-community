@@ -1,6 +1,6 @@
 # Define build arguments (use CUDA 11.3.1 by default)
 ARG UBUNTU_VERSION=20.04
-ARG CUDA_VERSION=11.3.1
+ARG CUDA_VERSION=11.7.1
 ARG CUDNN_VERSION=8
 
 # Use the *devel* image (includes CUDA toolkit + nvcc)
@@ -28,20 +28,20 @@ RUN apt-get update && apt-get install -y \
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
 
 # Install PyTorch with matching CUDA
-ARG PYTORCH_VERSION=1.12.0
-ARG PYTORCH_CUDA=cu113
+ARG PYTORCH_VERSION=1.13.1
+ARG PYTORCH_CUDA=cu117
 RUN pip install --no-cache-dir \
     numpy==1.21.6 \
     ninja \
     torch==${PYTORCH_VERSION}+${PYTORCH_CUDA} \
-    torchvision==0.13.0+${PYTORCH_CUDA} \
-    torchaudio==0.12.0 \
+    torchvision==0.14.1+${PYTORCH_CUDA} \
+    torchaudio==0.13.1 \
     --extra-index-url https://download.pytorch.org/whl/${PYTORCH_CUDA}
 
 # Clone and install Minkowski Engine
 RUN git clone https://github.com/zzhangje/MinkowskiEngine-community.git && \
     cd MinkowskiEngine-community && \
-    python setup.py install --blas_include_dirs=/usr/include/openblas --blas=openblas --force_cuda
+    python setup.py install --blas_include_dirs=/usr/include/openblas --force_cuda
 
 # Install additional Python packages
 RUN apt-get update && apt-get install -y \
