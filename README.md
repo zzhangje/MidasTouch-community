@@ -15,8 +15,6 @@ This is a patched version compatible with **Python 3.8 to 3.11** (`open3d` does 
 
 Build the docker image and allows docker to connect to your X server. You can specify the Ubuntu, CUDA, PyTorch version via [Dockerfile](./Dockerfile).
 
-> [Minkowski Engine](https://github.com/NVIDIA/MinkowskiEngine) is compatible with `numpy<=1.23.0` and `CUDA 10.2` or `CUDA 11.X`. The install option is set to `cpu_only` by default due to incompatibility with `CUDA 11.3` on the `RTX 4060`. You can change this to `force_cuda` if you prefer GPU support.
-
 ```bash
 docker build -t midastouch .
 xhost +local:root
