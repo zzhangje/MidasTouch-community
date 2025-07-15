@@ -164,7 +164,7 @@ def filter_real(cfg: DictConfig, viz: Viz) -> None:
 
     # run filter
     while True:
-        while viz.pause:
+        while viz and viz.pause:
             time.sleep(0.01)
         current_time = filter_stats["total_time"]
         idx = int(frame_rate * current_time)
@@ -290,7 +290,7 @@ def filter_real(cfg: DictConfig, viz: Viz) -> None:
     print("---------------------------------------------------------\n\n")
     np.save(osp.join(results_path, "filter_stats.npy"), filter_stats)
     pbar.set_description("Generating video from images")
-    images_to_video(results_path)  # convert saved images to .mp4
+    # images_to_video(results_path)  # convert saved images to .mp4
     pbar.close()
     return
 
