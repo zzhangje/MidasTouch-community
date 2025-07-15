@@ -12,6 +12,7 @@ from midastouch.modules.objects import ycb_test, ycb_train
 import hydra
 from omegaconf import DictConfig
 
+
 @hydra.main(version_base=None, config_path="./config", config_name="config")
 def main(cfg: DictConfig):
     cfg = cfg.method

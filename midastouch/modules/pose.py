@@ -127,13 +127,7 @@ def xyz_quat_averaged(T: torch.Tensor, w: torch.Tensor) -> torch.Tensor:
     a[a[:, 3] < 0] = -1 * a[a[:, 3] < 0]
 
     a = a.view(-1, 4, 1)
-
-    # eigen_values, eigen_vectors = (
-    #     torch.matmul(a.mul(w.view(-1, 1, 1)), a.transpose(1, 2))
-    #     .sum(dim=0)
-    #     .div(w.sum())
-    #     .eig(True)
-    # )
+    
     cov_matrix = torch.matmul(a.mul(w.view(-1, 1, 1)), a.transpose(1, 2)).sum(dim=0)
     cov_matrix = cov_matrix.div(w.sum())
     eigen_values, eigen_vectors = cov_matrix.symeig(eigenvectors=True)

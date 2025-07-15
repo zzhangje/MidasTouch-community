@@ -52,7 +52,7 @@ def get_device(cpu: bool = True, verbose: bool = True) -> str:
     if cpu:
         device = "cpu"
         if verbose:
-            print("By default, using device:", device)
+            print("Override, using device:", device)
     else:
         try:
             deviceID = GPUtil.getFirstAvailable(
@@ -67,9 +67,7 @@ def get_device(cpu: bool = True, verbose: bool = True) -> str:
                 "cuda:" + str(deviceID[0]) if torch.cuda.is_available() else "cpu"
             )
             if verbose:
-                print(
-                    "Override, using device:", torch.cuda.get_device_name(deviceID[0])
-                )
+                print("Using device:", torch.cuda.get_device_name(deviceID[0]))
         except:
             device = "cpu"
             if verbose:

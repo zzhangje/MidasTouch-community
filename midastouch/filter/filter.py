@@ -43,7 +43,7 @@ def filter(cfg: DictConfig, viz: Viz) -> None:
     """Filtering for tactile simulation data"""
     expt_cfg, tcn_cfg, tdn_cfg = cfg.expt, cfg.tcn, cfg.tdn
 
-    device = get_device()
+    device = get_device(cpu=False)
 
     # print('\n----------------------------------------\n')
     # print(OmegaConf.to_yaml(cfg))

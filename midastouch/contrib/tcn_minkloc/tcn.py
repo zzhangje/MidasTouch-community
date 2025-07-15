@@ -40,7 +40,7 @@ class TCN:
         self.load_weights(tcn_weights)
 
     def load_weights(self, weights):
-        device = get_device(verbose=False)
+        device = get_device(cpu=False, verbose=False)
         # Load MinkLoc weights
         weights = torch.load(weights, map_location=device)
         if type(weights) is dict:
